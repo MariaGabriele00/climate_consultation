@@ -66,7 +66,14 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Row(
-                children: [TextField()],
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      fillColor: Color.fromARGB(255, 168, 238, 238),
+                      border: OutlineInputBorder(),
+                    ),
+                  )
+                ],
               ),
             ],
           ),

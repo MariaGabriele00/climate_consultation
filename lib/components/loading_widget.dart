@@ -1,6 +1,6 @@
 import 'package:climate_consultation/utilies/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/src/pulse.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
@@ -8,12 +8,12 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.amberAccent,
+      backgroundColor: Color.fromARGB(255, 168, 238, 238),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SpinKitPulse(
+            SpinKitFadingCircle(
               color: kLightColor,
               size: 100,
             ),
