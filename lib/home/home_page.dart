@@ -30,13 +30,13 @@ class _HomePageState extends State<HomePage> {
       permission = await geolocatorPlatform.requestPermission();
       if (permission != LocationPermission.denied) {
         if (permission == LocationPermission.deniedForever) {
-          print('permission permanently denied');
+          print('Permissão negada para sempre');
         } else {
-          print('permission granted');
+          print('Permissão Garantida');
           getLocation();
         }
       } else {
-        print('user denied the request');
+        print('Foi negada a solicitação');
       }
     } else {}
     getLocation();
