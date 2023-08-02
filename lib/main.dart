@@ -12,7 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Consulta Clima',
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        colorScheme: const ColorScheme.light(
+          primary: Color.fromARGB(255, 164, 220, 228),
+        ),
+      ),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );

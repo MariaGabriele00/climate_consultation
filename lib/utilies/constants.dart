@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-const apiKey = 'c93ec169bc7918636f32dc40e73d73d8&units';
+const apiKey = 'c93ec169bc7918636f32dc40e73d73d8';
 const openWeatherMapURL = "https://api.openweathermap.org/data/2.5/weather";
 
 const lightColor = Color.fromARGB(255, 12, 19, 59);
 //cor clara
 const midLightColor = Color.fromARGB(153, 0, 0, 0);
 //cor de luz média
-const overlayColor = Color.fromARGB(255, 219, 192, 255);
+const overlayColor = Color.fromARGB(255, 164, 220, 228);
 //cor de sobreposição
-const darkColor = Color.fromARGB(255, 45, 7, 94);
+const darkColor = Color.fromARGB(255, 70, 32, 121);
 //cor escura
 const textFieldTextStyle = TextStyle(
-  fontSize: 16,
+  fontSize: 17,
   color: midLightColor,
 );
 const locationTextStyle = TextStyle(
@@ -45,6 +45,6 @@ const textFieldDecoraction = InputDecoration(
   hintStyle: textFieldTextStyle,
   prefixIcon: Icon(
     Icons.search_sharp,
-    color: Color.fromARGB(255, 1, 9, 117),
+    color: Color.fromARGB(255, 0, 0, 0),
   ),
 );

@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   WeatherModel? weatherModel;
   int code = 0;
   Weather weather = Weather();
-  var weatherData;
+  dynamic weatherData;
   String? title, message;
 
   @override
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         }
       } else {
         print('Foi negada a solicitação');
-        updateUI(cityName: 'herat');
+        updateUI(cityName: 'Maringa');
       }
     } else {}
     updateUI();
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
       }
       weatherData = await weather.getLocationWeather();
     } else {
-      weatherData = weather.getCityWeather(cityName);
+      weatherData = await weather.getCityWeather(cityName);
     }
 
     if (weatherData == null) {
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white12,
+                          foregroundColor: const Color.fromARGB(31, 0, 0, 0),
                           elevation: 1,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -159,8 +159,8 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               Text('Onde estou', style: textFieldTextStyle),
-                              SizedBox(width: 8),
-                              Icon(Icons.gps_fixed_sharp, color: Colors.black),
+                              SizedBox(width: 12),
+                              Icon(Icons.gps_fixed, color: Colors.black),
                             ],
                           ),
                         ),
@@ -178,8 +178,6 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.location_city_sharp,
-                                  color: midLightColor),
                               const SizedBox(width: 12),
                               Text(weatherModel!.location!,
                                   style: locationTextStyle),
@@ -189,10 +187,9 @@ class _HomePageState extends State<HomePage> {
                           SvgPicture.asset(
                             weatherModel!.icon!,
                             height: 280,
-                            color: lightColor,
                           ),
                           const SizedBox(height: 40),
-                          Text('${weatherModel!.temperature!.round()}',
+                          Text('${weatherModel!.temperature!.round()}°',
                               style: tempTextStyle),
                           Text(weatherModel!.description!.toUpperCase(),
                               style: locationTextStyle),
@@ -233,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                         DetailsWidget(
                           title: 'Humidade',
                           value:
-                              '${weatherModel != null ? weatherModel!.humidity! : 0}°',
+                              '${weatherModel != null ? weatherModel!.humidity! : 0}%',
                         ),
                       ],
                     ),
@@ -247,12 +244,3 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
-
-
-//var id = decodeData['weather'][0]['id'];
-  //    var temperature = decodeData['main']['temp'];
-    //  var cityName = decodeData['name'];
-
-      //print(id);
-      //print(temperature);
-      //print(cityName);

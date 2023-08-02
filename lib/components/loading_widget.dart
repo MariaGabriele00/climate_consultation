@@ -8,12 +8,12 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 219, 192, 255),
+      backgroundColor: overlayColor,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SpinKitFadingCircle(
+            SpinKitPouringHourGlassRefined(
               color: lightColor,
               size: 100,
             ),
@@ -21,7 +21,7 @@ class LoadingWidget extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Buscando dados...',
+              'Buscando informações...',
               style: TextStyle(
                 fontSize: 20,
                 color: midLightColor,

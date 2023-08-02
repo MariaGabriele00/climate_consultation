@@ -7,14 +7,14 @@ class Weather {
     Location location = Location();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        "$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&APPID=$apiKey=metric");
+        "$openWeatherMapURL?units=metric&lat=${location.latitude}&lon=${location.longitude}&APPID=$apiKey");
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
 
   Future<dynamic> getCityWeather(String cityName) async {
-    NetworkHelper networkHelper =
-        NetworkHelper('$openWeatherMapURL?q=$cityName&appid=$apiKey=metric');
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
