@@ -7,29 +7,31 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: overlayColor,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SpinKitPouringHourGlassRefined(
-              color: lightColor,
-              size: 100,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Buscando informações...',
-              style: TextStyle(
-                fontSize: 20,
-                color: midLightColor,
+      body: Center(child: LayoutBuilder(
+        builder: ((context, constraints) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SpinKitPumpingHeart(
+                color: Color.fromARGB(255, 145, 10, 10),
+                size: 150,
               ),
-            ),
-          ],
-        ),
-      ),
+              SizedBox(
+                height: constraints.maxHeight * 0.1,
+              ),
+              const Text(
+                'Buscando informações...',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: midLightColor,
+                ),
+              ),
+            ],
+          );
+        }),
+      )),
     );
   }
 }

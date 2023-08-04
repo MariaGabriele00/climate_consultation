@@ -154,9 +154,9 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: const SizedBox(
-                          height: 60,
-                          child: Row(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          child: const Row(
                             children: [
                               Text('Onde estou', style: textFieldTextStyle),
                               SizedBox(width: 12),
@@ -171,31 +171,33 @@ class _HomePageState extends State<HomePage> {
               ),
               isErrorOccured
                   ? ErrorMessage(title: title!, message: message!)
-                  : Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(width: 12),
-                              Text(weatherModel!.location!,
-                                  style: locationTextStyle),
-                            ],
-                          ),
-                          const SizedBox(height: 25),
-                          SvgPicture.asset(
-                            weatherModel!.icon!,
-                            height: 280,
-                          ),
-                          const SizedBox(height: 40),
-                          Text('${weatherModel!.temperature!.round()}°',
-                              style: tempTextStyle),
-                          Text(weatherModel!.description!.toUpperCase(),
-                              style: locationTextStyle),
-                        ],
-                      ),
-                    ),
+                  : Expanded(child: LayoutBuilder(
+                      builder: (ctx, constraints) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(width: constraints.maxWidth * 0.0),
+                                Text(weatherModel!.location!,
+                                    style: locationTextStyle),
+                              ],
+                            ),
+                            SizedBox(height: constraints.maxHeight * 0.0),
+                            SvgPicture.asset(
+                              weatherModel!.icon!,
+                              height: constraints.maxHeight * 0.3,
+                            ),
+                            SizedBox(height: constraints.maxHeight * 0.0),
+                            Text('${weatherModel!.temperature!.round()}°',
+                                style: tempTextStyle),
+                            Text(weatherModel!.description!.toUpperCase(),
+                                style: textFieldTextStyle),
+                          ],
+                        );
+                      },
+                    )),
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: Card(
@@ -203,8 +205,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   color: overlayColor,
-                  child: SizedBox(
-                    height: 90,
+                  child: SingleChildScrollView(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,

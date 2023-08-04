@@ -5,30 +5,30 @@ const openWeatherMapURL = "https://api.openweathermap.org/data/2.5/weather";
 
 const lightColor = Color.fromARGB(255, 12, 19, 59);
 //cor clara
-const midLightColor = Color.fromARGB(153, 0, 0, 0);
+const midLightColor = Colors.black;
 //cor de luz média
 const overlayColor = Color.fromARGB(255, 164, 220, 228);
 //cor de sobreposição
-const darkColor = Color.fromARGB(255, 70, 32, 121);
+const darkColor = Color.fromARGB(255, 0, 0, 0);
 //cor escura
 const textFieldTextStyle = TextStyle(
-  fontSize: 17,
+  fontSize: 20,
   color: midLightColor,
 );
 const locationTextStyle = TextStyle(
-  fontSize: 20,
+  fontSize: 26,
   color: midLightColor,
 );
 const tempTextStyle = TextStyle(
-  fontSize: 80,
+  fontSize: 89,
 );
 const detailsTextStyle = TextStyle(
-  fontSize: 20,
+  fontSize: 25,
   color: midLightColor,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w900,
 );
 const detailsTitleTextStyle = TextStyle(
-  fontSize: 16,
+  fontSize: 15,
   color: darkColor,
 );
 

@@ -1,5 +1,6 @@
 import 'package:climate_consultation/utilies/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class ErrorMessage extends StatelessWidget {
   final String title, message;
@@ -9,17 +10,21 @@ class ErrorMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_sharp, size: 150),
-            const SizedBox(height: 20),
-            Text(title, style: detailsTextStyle),
-            const SizedBox(height: 8),
-            Text(message,
-                style: locationTextStyle, textAlign: TextAlign.center),
-          ],
+        padding: const EdgeInsets.all(12),
+        child: LayoutBuilder(
+          builder: (ctx, constraints) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_sharp, size: 150),
+                SizedBox(height: constraints.maxHeight * 0.1),
+                Text(title, style: detailsTextStyle),
+                SizedBox(height: constraints.maxHeight * 0.1),
+                Text(message,
+                    style: locationTextStyle, textAlign: TextAlign.center),
+              ],
+            );
+          },
         ),
       ),
     );
