@@ -1,25 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:climate_consultation/home/home_page.dart';
+import 'core/app_widget.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Consulta Clima',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: const ColorScheme.light(
-          primary: Color.fromARGB(255, 164, 220, 228),
-        ),
-      ),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  runApp(const AppWidget());
 }
