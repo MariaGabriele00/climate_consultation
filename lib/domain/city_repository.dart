@@ -1,5 +1,5 @@
 import 'entities/entities.dart';
 
 abstract class CityRepository {
-  List<CityEntity> searchByName({required String nameCity});
+  Future<List<CityEntity>> searchByName({required String nameCity});
 }
