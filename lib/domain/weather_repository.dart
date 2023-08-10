@@ -1,6 +1,6 @@
 import 'entities/entities.dart';
 
-abstract class WeatherRepository {
+abstract interface class WeatherRepository {
   Future<WeatherEntity> searchByLocation({
     required double lon,
     required double lat,
