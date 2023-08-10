@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   equatable: ^2.0.5
+  faker: ^2.1.0
   flutter:
     sdk: flutter
   uno: ^1.1.9
