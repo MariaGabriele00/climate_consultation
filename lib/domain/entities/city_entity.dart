@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class CityEntity extends Equatable {
+  final String id;
   final String name;
   final String state;
   final String country;
@@ -8,6 +9,7 @@ class CityEntity extends Equatable {
   final double lag;
 
   const CityEntity({
+    required this.id,
     required this.name,
     required this.state,
     required this.country,
@@ -17,6 +19,7 @@ class CityEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         name,
         state,
         country,
