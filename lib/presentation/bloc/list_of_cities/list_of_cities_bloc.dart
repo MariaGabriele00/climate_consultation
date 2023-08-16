@@ -30,5 +30,8 @@ class ListOfCitiesBloc extends Bloc<ListOfCitiesEvent, ListOfCitiesState> {
     on<ListOfCitiesCitySelected>((event, emit) {
       citySelected = cities.firstWhere((city) => city.id == event.cityId);
     });
+    on<ListOfCitiesRestarted>((event, emit) {
+      emit(ListOfCitiesInitial());
+    });
   }
 }

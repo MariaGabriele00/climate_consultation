@@ -23,3 +23,5 @@ final class ListOfCitiesCitySelected extends ListOfCitiesEvent {
     required this.cityId,
   });
 }
+
+final class ListOfCitiesRestarted extends ListOfCitiesEvent {}
