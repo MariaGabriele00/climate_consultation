@@ -6,7 +6,7 @@ import '../../infra/infra.dart';
 CityRepository cityRepositoryFactory() {
   return CityRepositoryImpl(
     client: Uno(),
-    url: 'https://api.openweathermap.org/geo',
+    url: 'https://api.openweathermap.org',
     appId: 'c93ec169bc7918636f32dc40e73d73d8',
   );
 }

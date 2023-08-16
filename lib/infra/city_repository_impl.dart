@@ -17,7 +17,7 @@ class CityRepositoryImpl implements CityRepository {
   @override
   Future<List<CityEntity>> searchByName({required String nameCity}) async {
     final response = await client.get(
-      '$url/1.0/direct?q=$nameCity&limit=5&lang=pt_br&APPID=$appId',
+      '$url/geo/1.0/direct?q=$nameCity&limit=5&lang=pt_br&APPID=$appId',
     );
     if (response.status == 200) {
       return CityMapper.fromJson(response.data);
