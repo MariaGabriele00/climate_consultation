@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../main/factories/factories.dart';
 import '../../../bloc/bloc.dart';
+import 'widgets/widgets.dart';
 
 class ListOfCitiesPage extends StatefulWidget {
   const ListOfCitiesPage({super.key});
@@ -36,70 +37,42 @@ class _ListOfCitiesPageState extends State<ListOfCitiesPage> {
         child: BlocBuilder<ListOfCitiesBloc, ListOfCitiesState>(
           bloc: bloc,
           builder: (context, state) {
+            void restartPage() {
+              bloc.add(ListOfCitiesRestarted());
+            }
+
+            void searchText(String value) {
+              bloc.add(ListOfCitiesFieldChanged(value: value));
+            }
+
+            void searched() {
+              bloc.add(ListOfCitiesSearched());
+            }
+
             if (state is ListOfCitiesInitial) {
-              return TextFormField(
-                onChanged: (value) {
-                  bloc.add(ListOfCitiesFieldChanged(value: value));
-                },
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: 'Digite o nome da cidade',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      bloc.add(ListOfCitiesSearched());
-                    },
-                  ),
+              return Center(
+                child: SearchFieldWidget(
+                  onChanged: searchText,
+                  onPressed: searched,
                 ),
               );
             }
             if (state is ListOfCitiesLoading) {
-              return const CircularProgressIndicator();
+              return const CityLoadingWidget();
             }
+
             if (state is ListOfCitiesNotFound) {
-              return const Text('Nenhuma cidade encontrada');
+              return CityNotFoundWidget(restartPage: restartPage);
             }
+
             if (state is ListOfCitiesDataFound) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: 'Digite o nome da cidade',
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (state.cities.isNotEmpty)
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.cities.length,
-                        itemBuilder: (context, index) {
-                          final city = state.cities[index];
-                          return ListTile(
-                            onTap: () {},
-                            title: Text(city.name),
-                            subtitle: Text('${city.state} - ${city.country}'),
-                            trailing: Image.network(
-                              'https://openweathermap.org/images/flags/${city.country.toLowerCase()}.png',
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(Icons.radar);
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                ],
+              return CityListWidget(
+                cities: state.cities,
+                onChanged: searchText,
+                onPressed: searched,
               );
             }
+
             return const SizedBox.shrink();
           },
         ),
