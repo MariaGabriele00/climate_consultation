@@ -12,10 +12,10 @@ extension CityMapper on CityEntity {
     return CityEntity(
       id: const Uuid().v4(),
       name: map['name'] as String,
-      state: ['state'] as String,
+      state: map['state'] as String,
       country: map['country'] as String,
       lon: map['lon'] as double,
-      lag: map['lag'] as double,
+      lat: map['lat'] as double,
     );
   }
 }

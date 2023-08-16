@@ -6,7 +6,7 @@ class CityEntity extends Equatable {
   final String state;
   final String country;
   final double lon;
-  final double lag;
+  final double lat;
 
   const CityEntity({
     required this.id,
@@ -14,7 +14,7 @@ class CityEntity extends Equatable {
     required this.state,
     required this.country,
     required this.lon,
-    required this.lag,
+    required this.lat,
   });
 
   @override
@@ -24,6 +24,6 @@ class CityEntity extends Equatable {
         state,
         country,
         lon,
-        lag,
+        lat,
       ];
 }
