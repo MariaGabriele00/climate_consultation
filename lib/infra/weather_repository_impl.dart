@@ -7,6 +7,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final Uno client;
   final String url;
   final String appId;
+
   WeatherRepositoryImpl({
     required this.client,
     required this.url,
@@ -24,10 +25,5 @@ class WeatherRepositoryImpl implements WeatherRepository {
       return WeatherMapper.fromMap(response.data);
     }
     throw Exception('Não foi encontrado nenhuma previsão.');
-  }
-
-  @override
-  Future<WeatherEntity> searchByGeolocation() async {
-    throw UnimplementedError();
   }
 }

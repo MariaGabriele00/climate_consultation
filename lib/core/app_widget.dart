@@ -1,3 +1,4 @@
+import 'package:climate_consultation/presentation/ui/pages/weather_detail/weather_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../presentation/presentation.dart';
@@ -11,9 +12,14 @@ class AppWidget extends StatelessWidget {
       title: 'Consulta Clima',
       theme: ThemeData(
         useMaterial3: false,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
+        colorSchemeSeed: Colors.teal,
       ),
-      home: const ListOfCitiesPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ListOfCitiesPage(),
+        '/weather-detail': (context) => const WeatherDetailPage(),
+      },
+      debugShowCheckedModeBanner: false,
     );
   }
 }

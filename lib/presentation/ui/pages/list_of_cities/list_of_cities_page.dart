@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../main/factories/factories.dart';
@@ -14,6 +15,7 @@ class ListOfCitiesPage extends StatefulWidget {
 
 class _ListOfCitiesPageState extends State<ListOfCitiesPage> {
   late final ListOfCitiesBloc bloc;
+
   @override
   void initState() {
     bloc = listOfCitiesBlocFactory();
@@ -28,55 +30,75 @@ class _ListOfCitiesPageState extends State<ListOfCitiesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de cidades'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: BlocBuilder<ListOfCitiesBloc, ListOfCitiesState>(
-          bloc: bloc,
-          builder: (context, state) {
-            void restartPage() {
-              bloc.add(ListOfCitiesRestarted());
-            }
+    return BlocConsumer<ListOfCitiesBloc, ListOfCitiesState>(
+      bloc: bloc,
+      listener: (context, state) {
+        if (state is CitySelectedState) {
+          Navigator.of(context).popAndPushNamed(
+            '/weather-detail',
+            arguments: state.city,
+          );
+        }
+      },
+      builder: (context, state) {
+        void restartPage() {
+          bloc.add(RestartedEvent());
+        }
 
-            void searchText(String value) {
-              bloc.add(ListOfCitiesFieldChanged(value: value));
-            }
+        void searchText(String value) {
+          bloc.add(FieldChangedEvent(value: value));
+        }
 
-            void searched() {
-              bloc.add(ListOfCitiesSearched());
-            }
+        void searched() {
+          bloc.add(SearchedEvent());
+        }
 
-            if (state is ListOfCitiesInitial) {
-              return Center(
-                child: SearchFieldWidget(
+        return Scaffold(
+          backgroundColor: Colors.teal,
+          floatingActionButton: Visibility(
+            visible: state is! FailureState,
+            child: FloatingActionButton(
+              tooltip: 'Sua posição está aqui',
+              child: const Icon(Icons.pin_drop_outlined),
+              onPressed: () {
+                bloc.add(SearchWithGeolocatorEvent());
+              },
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8),
+            child: switch (state) {
+              LoadingState() ||
+              CitySelectedState() =>
+                const CityLoadingWidget(),
+              FailureState(:final errorMessage) => FailureWidget(
+                  errorMessage: errorMessage,
+                  restartPage: restartPage,
+                ),
+              InitialState() => Center(
+                  child: SearchFieldWidget(
+                    onChanged: searchText,
+                    onPressed: searched,
+                  ),
+                ),
+              DataFoundState(:final cities) => CityListWidget(
+                  cities: cities,
                   onChanged: searchText,
                   onPressed: searched,
+                  onSelectCity: (
+                    cityId,
+                  ) {
+                    bloc.add(
+                      CitySelectedEvent(
+                        cityId: cityId,
+                      ),
+                    );
+                  },
                 ),
-              );
-            }
-            if (state is ListOfCitiesLoading) {
-              return const CityLoadingWidget();
-            }
-
-            if (state is ListOfCitiesNotFound) {
-              return CityNotFoundWidget(restartPage: restartPage);
-            }
-
-            if (state is ListOfCitiesDataFound) {
-              return CityListWidget(
-                cities: state.cities,
-                onChanged: searchText,
-                onPressed: searched,
-              );
-            }
-
-            return const SizedBox.shrink();
-          },
-        ),
-      ),
+            },
+          ),
+        );
+      },
     );
   }
 }

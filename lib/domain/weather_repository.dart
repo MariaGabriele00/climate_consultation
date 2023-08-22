@@ -5,6 +5,4 @@ abstract interface class WeatherRepository {
     required double lon,
     required double lat,
   });
-
-  Future<WeatherEntity> searchByGeolocation();
 }

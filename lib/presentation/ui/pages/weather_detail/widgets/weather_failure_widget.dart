@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CityNotFoundWidget extends StatelessWidget {
+class WeatherFailureWidget extends StatelessWidget {
+  final String errorMessage;
   final void Function() restartPage;
 
-  const CityNotFoundWidget({
+  const WeatherFailureWidget({
     super.key,
+    required this.errorMessage,
     required this.restartPage,
   });
 
@@ -16,13 +18,15 @@ class CityNotFoundWidget extends StatelessWidget {
       children: [
         const SizedBox.shrink(),
         Text(
-          'Nenhuma cidade encontrada',
+          'Falha ao consultar o clima, verifique sua internet',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         ElevatedButton(
           onPressed: restartPage,
-          child: const Text('Consultar outra cidade'),
+          child: const Text(
+            'Consultar outra cidade',
+          ),
         ),
       ],
     );

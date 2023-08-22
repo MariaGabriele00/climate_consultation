@@ -7,21 +7,23 @@ sealed class ListOfCitiesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class ListOfCitiesFieldChanged extends ListOfCitiesEvent {
+final class FieldChangedEvent extends ListOfCitiesEvent {
   final String value;
-  const ListOfCitiesFieldChanged({
+  const FieldChangedEvent({
     required this.value,
   });
 }
 
-final class ListOfCitiesSearched extends ListOfCitiesEvent {}
+final class SearchedEvent extends ListOfCitiesEvent {}
 
-final class ListOfCitiesCitySelected extends ListOfCitiesEvent {
+final class CitySelectedEvent extends ListOfCitiesEvent {
   final String cityId;
 
-  const ListOfCitiesCitySelected({
+  const CitySelectedEvent({
     required this.cityId,
   });
 }
 
-final class ListOfCitiesRestarted extends ListOfCitiesEvent {}
+final class RestartedEvent extends ListOfCitiesEvent {}
+
+final class SearchWithGeolocatorEvent extends ListOfCitiesEvent {}

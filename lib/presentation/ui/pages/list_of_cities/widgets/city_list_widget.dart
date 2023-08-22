@@ -7,12 +7,14 @@ class CityListWidget extends StatelessWidget {
   final List<CityEntity> cities;
   final void Function(String) onChanged;
   final void Function() onPressed;
+  final void Function(String) onSelectCity;
 
   const CityListWidget({
     super.key,
     required this.cities,
     required this.onChanged,
     required this.onPressed,
+    required this.onSelectCity,
   });
 
   @override
@@ -35,7 +37,9 @@ class CityListWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final city = cities[index];
                 return ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    onSelectCity(city.id);
+                  },
                   title: Text(city.name),
                   subtitle: Text('${city.state} - ${city.country}'),
                   trailing: Image.network(

@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import '../../domain/domain.dart';
 
 extension CityMapper on CityEntity {
@@ -9,8 +7,7 @@ extension CityMapper on CityEntity {
   }
 
   static CityEntity _fromMap(Map<String, dynamic> map) {
-    return CityEntity(
-      id: const Uuid().v4(),
+    return CityEntity.init(
       name: map['name'] as String,
       state: map['state'] as String,
       country: map['country'] as String,

@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:uno/uno.dart';
 
 import '../domain/domain.dart';
@@ -22,6 +23,38 @@ class CityRepositoryImpl implements CityRepository {
     if (response.status == 200) {
       return CityMapper.fromJson(response.data);
     }
-    throw Exception('Não foi possível encontrar a cidade.');
+    throw const FormatException('Não foi possível encontrar a cidade.');
+  }
+
+  @override
+  Future<CityEntity> searchByGeolocation() async {
+    var serviceEnabled = false;
+    late LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      throw const FormatException('Seu GPS está desativado.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        throw const FormatException(
+          'Precisa da permissão para encontrar sua localicação',
+        );
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      throw const FormatException(
+        'Permissão de localização negada permanentemente',
+      );
+    }
+    final position = await Geolocator.getCurrentPosition();
+    return CityEntity.init(
+      name: '',
+      state: '',
+      country: 'country',
+      lon: position.longitude,
+      lat: position.latitude,
+    );
   }
 }
