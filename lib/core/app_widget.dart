@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
       title: 'Consulta Clima',
       theme: ThemeData(
         useMaterial3: false,
-        colorSchemeSeed: Colors.teal,
+        colorSchemeSeed: const Color.fromARGB(255, 103, 131, 128),
       ),
       initialRoute: '/',
       routes: {

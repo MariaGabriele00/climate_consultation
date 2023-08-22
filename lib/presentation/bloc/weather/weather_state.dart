@@ -9,11 +9,6 @@ sealed class WeatherState extends Equatable {
 
 final class WeatherLoadingState extends WeatherState {}
 
-final class WeatherFailureWidget extends WeatherState {
-  final String errorMessage;
-  const WeatherFailureWidget(this.errorMessage);
-}
-
 final class WeatherDataFoundState extends WeatherState {
   final WeatherEntity weather;
   const WeatherDataFoundState(this.weather);

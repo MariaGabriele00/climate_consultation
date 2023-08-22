@@ -1,8 +1,7 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
 import 'package:climate_consultation/domain/domain.dart';
 import 'package:climate_consultation/infra/infra.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:uno/uno.dart';
 
 class MockUno extends Mock implements Uno {}

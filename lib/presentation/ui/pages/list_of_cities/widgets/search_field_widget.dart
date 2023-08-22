@@ -16,8 +16,8 @@ class SearchFieldWidget extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.teal,
-        border: const OutlineInputBorder(),
+        fillColor: const Color.fromARGB(255, 103, 131, 128),
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
         hintText: 'Digite o nome da cidade',
         hintStyle: const TextStyle(
           color: Colors.white,

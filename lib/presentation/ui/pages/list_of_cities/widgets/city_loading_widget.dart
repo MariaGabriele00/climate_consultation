@@ -12,7 +12,7 @@ class CityLoadingWidget extends StatelessWidget {
       child: SpinKitWaveSpinner(
         //carregamento animado
         size: 120,
-        color: Colors.teal,
+        color: Color.fromARGB(255, 227, 255, 252),
       ),
     );
   }

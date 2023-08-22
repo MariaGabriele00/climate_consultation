@@ -54,48 +54,67 @@ class _ListOfCitiesPageState extends State<ListOfCitiesPage> {
         }
 
         return Scaffold(
-          backgroundColor: Colors.teal,
+          backgroundColor: const Color.fromARGB(255, 103, 131, 128),
+          appBar: AppBar(
+            title: const Text('C O N S U L T E   O   C L I M A'),
+            backgroundColor: const Color.fromARGB(255, 103, 131, 128),
+            centerTitle: true,
+          ),
           floatingActionButton: Visibility(
             visible: state is! FailureState,
             child: FloatingActionButton(
               tooltip: 'Sua posição está aqui',
+              backgroundColor: const Color.fromARGB(255, 103, 131, 128),
               child: const Icon(Icons.pin_drop_outlined),
               onPressed: () {
                 bloc.add(SearchWithGeolocatorEvent());
               },
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(8),
-            child: switch (state) {
-              LoadingState() ||
-              CitySelectedState() =>
-                const CityLoadingWidget(),
-              FailureState(:final errorMessage) => FailureWidget(
-                  errorMessage: errorMessage,
-                  restartPage: restartPage,
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  "https://images.pexels.com/photos/3774895/pexels-photo-3774895.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                 ),
-              InitialState() => Center(
-                  child: SearchFieldWidget(
+                opacity: 0.6,
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: switch (state) {
+                LoadingState() ||
+                CitySelectedState() =>
+                  const CityLoadingWidget(),
+                FailureState(:final errorMessage) => FailureWidget(
+                    errorMessage: errorMessage,
+                    restartPage: restartPage,
+                  ),
+                InitialState() => Center(
+                    child: SearchFieldWidget(
+                      onChanged: searchText,
+                      onPressed: searched,
+                    ),
+                  ),
+                DataFoundState(:final cities) => CityListWidget(
+                    cities: cities,
                     onChanged: searchText,
                     onPressed: searched,
+                    onSelectCity: (
+                      cityId,
+                    ) {
+                      bloc.add(
+                        CitySelectedEvent(
+                          cityId: cityId,
+                        ),
+                      );
+                    },
                   ),
-                ),
-              DataFoundState(:final cities) => CityListWidget(
-                  cities: cities,
-                  onChanged: searchText,
-                  onPressed: searched,
-                  onSelectCity: (
-                    cityId,
-                  ) {
-                    bloc.add(
-                      CitySelectedEvent(
-                        cityId: cityId,
-                      ),
-                    );
-                  },
-                ),
-            },
+              },
+            ),
           ),
         );
       },
