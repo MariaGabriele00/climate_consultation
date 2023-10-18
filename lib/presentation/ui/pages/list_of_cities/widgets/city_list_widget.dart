@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../domain/entities/city_entity.dart';
+import '../../../../../domain/domain.dart';
 import 'search_field_widget.dart';
 
 class CityListWidget extends StatelessWidget {
@@ -26,9 +26,7 @@ class CityListWidget extends StatelessWidget {
           onChanged: onChanged,
           onPressed: onPressed,
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         if (cities.isNotEmpty)
           Expanded(
             child: ListView.builder(
@@ -36,16 +34,19 @@ class CityListWidget extends StatelessWidget {
               itemCount: cities.length,
               itemBuilder: (context, index) {
                 final city = cities[index];
+
                 return ListTile(
                   onTap: () {
                     onSelectCity(city.id);
                   },
                   title: Text(city.name),
-                  subtitle: Text('${city.state} - ${city.country}'),
+                  subtitle: city.state.isNotEmpty
+                      ? Text('${city.state} - ${city.country}')
+                      : null,
                   trailing: Image.network(
                     'https://openweathermap.org/images/flags/${city.country.toLowerCase()}.png',
                     errorBuilder: (context, error, stackTrace) {
-                      return const Icon(Icons.radar);
+                      return const Icon(Icons.not_accessible);
                     },
                   ),
                 );

@@ -1,4 +1,3 @@
-import 'package:climate_consultation/presentation/ui/pages/weather_detail/weather_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../presentation/presentation.dart';
@@ -9,17 +8,16 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Consulta Clima',
+      title: 'Party Weather',
       theme: ThemeData(
-        useMaterial3: false,
-        colorSchemeSeed: const Color.fromARGB(255, 103, 131, 128),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const ListOfCitiesPage(),
         '/weather-detail': (context) => const WeatherDetailPage(),
       },
-      debugShowCheckedModeBanner: false,
     );
   }
 }

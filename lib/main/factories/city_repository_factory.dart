@@ -3,7 +3,7 @@ import 'package:uno/uno.dart';
 import '../../domain/domain.dart';
 import '../../infra/infra.dart';
 
-CityRepository cityRepositoryFactory() {
+CityRepository cityReopsitoryFactory() {
   return CityRepositoryImpl(
     client: Uno(),
     url: 'https://api.openweathermap.org',

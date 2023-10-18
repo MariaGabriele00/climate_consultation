@@ -18,15 +18,13 @@ class FailureWidget extends StatelessWidget {
       children: [
         const SizedBox.shrink(),
         Text(
-          'Nenhuma cidade encontrada',
+          errorMessage,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         ElevatedButton(
           onPressed: restartPage,
-          child: const Text(
-            'Consultar outra cidade',
-          ),
+          child: const Text('Consultar outra cidade'),
         ),
       ],
     );

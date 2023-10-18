@@ -1,7 +1,12 @@
+import 'package:dartz/dartz.dart';
+
 import 'entities/entities.dart';
+import 'failures/failures.dart';
 
 abstract interface class CityRepository {
-  Future<List<CityEntity>> searchByName({required String nameCity});
+  Future<Either<CityFailure, List<CityEntity>>> searchByName({
+    required String nameCity,
+  });
 
-  Future<CityEntity> searchByGeolocation();
+  Future<Either<CityFailure, CityEntity>> searchByGeolocation();
 }

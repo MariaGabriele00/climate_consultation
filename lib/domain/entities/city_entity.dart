@@ -1,22 +1,18 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-class CityEntity extends Equatable {
-  final String id;
-  final String name;
-  final String state;
-  final String country;
-  final double lon;
-  final double lat;
+part 'city_entity.freezed.dart';
 
-  const CityEntity._({
-    required this.id,
-    required this.name,
-    required this.state,
-    required this.country,
-    required this.lon,
-    required this.lat,
-  });
+@freezed
+sealed class CityEntity with _$CityEntity {
+  const factory CityEntity._({
+    required String id,
+    required String name,
+    required String state,
+    required String country,
+    required double lon,
+    required double lat,
+  }) = _CityEntity;
 
   factory CityEntity.init({
     required String name,
@@ -34,17 +30,4 @@ class CityEntity extends Equatable {
       lat: lat,
     );
   }
-  String get descriptionFull {
-    return name.isEmpty ? 'Sua posição atual' : '$name, $state - $country';
-  }
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        state,
-        country,
-        lon,
-        lat,
-      ];
 }

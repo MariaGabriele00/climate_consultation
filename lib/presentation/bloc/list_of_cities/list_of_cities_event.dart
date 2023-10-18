@@ -9,6 +9,7 @@ sealed class ListOfCitiesEvent extends Equatable {
 
 final class FieldChangedEvent extends ListOfCitiesEvent {
   final String value;
+
   const FieldChangedEvent({
     required this.value,
   });
@@ -26,4 +27,4 @@ final class CitySelectedEvent extends ListOfCitiesEvent {
 
 final class RestartedEvent extends ListOfCitiesEvent {}
 
-final class SearchWithGeolocatorEvent extends ListOfCitiesEvent {}
+final class SearchWithGeolocationEvent extends ListOfCitiesEvent {}

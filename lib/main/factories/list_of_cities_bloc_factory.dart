@@ -3,6 +3,6 @@ import 'city_repository_factory.dart';
 
 ListOfCitiesBloc listOfCitiesBlocFactory() {
   return ListOfCitiesBloc(
-    repository: cityRepositoryFactory(),
+    repository: cityReopsitoryFactory(),
   );
 }

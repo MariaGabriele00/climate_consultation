@@ -1,25 +1,20 @@
 part of 'weather_cubit.dart';
 
-sealed class WeatherState extends Equatable {
-  const WeatherState();
+@freezed
+sealed class WeatherState with _$WeatherState {
+  const factory WeatherState({
+    required bool isLoading,
+    required WeatherEntity weather,
+    required CityEntity? currentCity,
+    required WeatherFailure? failure,
+  }) = _WeatherState;
 
-  @override
-  List<Object> get props => [];
-}
-
-final class WeatherLoadingState extends WeatherState {}
-
-final class WeatherDataFoundState extends WeatherState {
-  final WeatherEntity weather;
-  const WeatherDataFoundState(this.weather);
-
-  @override
-  List<Object> get props => [weather];
-}
-
-final class WeatherFailureState extends WeatherState {
-  final String errorMessage;
-  const WeatherFailureState(this.errorMessage);
-  @override
-  List<Object> get props => [errorMessage];
+  factory WeatherState.init() {
+    return WeatherState(
+      isLoading: true,
+      weather: WeatherEntity.init(),
+      currentCity: null,
+      failure: null,
+    );
+  }
 }

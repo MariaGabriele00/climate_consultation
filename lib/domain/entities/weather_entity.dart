@@ -1,23 +1,22 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class WeatherEntity extends Equatable {
-  final double temp;
-  final double minTemp;
-  final double maxTemp;
-  final double humidity;
+part 'weather_entity.freezed.dart';
 
-  const WeatherEntity({
-    required this.temp,
-    required this.minTemp,
-    required this.maxTemp,
-    required this.humidity,
-  });
+@freezed
+sealed class WeatherEntity with _$WeatherEntity {
+  const factory WeatherEntity({
+    required double temp,
+    required double minTemp,
+    required double maxTemp,
+    required double humidity,
+  }) = _WeatherEntity;
 
-  @override
-  List<Object?> get props => [
-        temp,
-        minTemp,
-        maxTemp,
-        humidity,
-      ];
+  factory WeatherEntity.init() {
+    return const WeatherEntity(
+      temp: 0,
+      minTemp: 0,
+      maxTemp: 0,
+      humidity: 0,
+    );
+  }
 }

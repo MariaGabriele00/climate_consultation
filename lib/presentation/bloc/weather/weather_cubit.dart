@@ -1,30 +1,45 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/domain.dart';
 
 part 'weather_state.dart';
+part 'weather_cubit.freezed.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
   final WeatherRepository repository;
 
-  late final CityEntity currentCity;
   WeatherCubit({
     required this.repository,
-  }) : super(WeatherLoadingState());
+  }) : super(WeatherState.init());
+
   Future<void> searchByLocation(CityEntity city) async {
-    currentCity = city;
+    emit(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
+
     final response = await repository.searchByLocation(
       lon: city.lon,
       lat: city.lat,
     );
-    emit(WeatherDataFoundState(response));
-  }
 
-  void resfreshWeather() {
-    emit(WeatherLoadingState());
-    searchByLocation(currentCity);
-  }
+    final newState = response.fold(
+      (newFailure) => state.copyWith(
+        failure: newFailure,
+      ),
+      (newWeather) => state.copyWith(
+        weather: newWeather,
+        failure: null,
+      ),
+    );
 
-  void consultAnotherCity() {}
+    emit(
+      newState.copyWith(
+        isLoading: false,
+        currentCity: city,
+      ),
+    );
+  }
 }
